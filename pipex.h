@@ -33,8 +33,12 @@ typedef enum {
 	WRITE
 }	PIPE_DATA;
 
+// ------------ BONUS
+char	*to_the_delimiter(char *to_find);
 // ------------ UTILS
+int		open_check(char *file_path, int option);
 void	ft_free_array(char **array);
+char	*find_valid_path(char *cmd, char **envp, int i);
+
 
 #endif
-
