@@ -19,9 +19,11 @@ int	open_check(char *file_path, int option)
 	if (0 == option)
 		fd = open(file_path, O_RDONLY, 0777);
 	else if (1 == option)
-		fd = open(file_path, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		fd = open(file_path, O_CREAT | O_WRONLY | O_TRUNC, \
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	else
-		fd = open(file_path, O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		fd = open(file_path, O_CREAT | O_WRONLY | O_APPEND, \
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (-1 == fd)
 	{
 		ft_putstr_fd("Error : Open outfile/infile failed.\n", STDOUT_FILENO);
@@ -35,7 +37,7 @@ void	ft_free_array(char **array)
 	size_t	i;
 
 	i = 0;
-	while (array[i][0] != '\0')
+	while (array[i])
 	{
 		free(array[i]);
 		i++;
@@ -49,15 +51,15 @@ char	*find_valid_path(char *cmd, char **envp, int i)
 	char	*temp_path;
 	char	*full_path;
 
-	while (ft_strnstr(envp[i], "PATH", 4) == 0) // find PATH:
+	while (ft_strnstr(envp[i], "PATH", 4) == 0) // info - find PATH:
 		i++;
-	all_paths = ft_split(envp[i] + 5, ':'); // go to PATH:here by skipping "PATH:"
+	all_paths = ft_split(envp[i] + 5, ':'); // info - go to PATH:here by skipping "PATH:"
 	i = -1;
 	while (all_paths[++i])
 	{
-		temp_path = ft_strjoin(all_paths[i], "/"); // path + '/'
-		full_path = ft_strjoin(temp_path, cmd); // path/ + 'ls'
-		temp_path = NULL;
+		temp_path = ft_strjoin(all_paths[i], "/"); // info - path + '/'
+		full_path = ft_strjoin(temp_path, cmd); // info - path/ + 'ls'
+		free(temp_path);
 		if (0 == access(full_path, F_OK | X_OK))
 		{
 			ft_free_array(all_paths);
