@@ -6,11 +6,11 @@
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:28:55 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/24 12:45:33 by jveirman         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:26:00 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static char	*ft_delimiter_hunter(int fd, char *ret, char *to_find)
 {
@@ -18,7 +18,7 @@ static char	*ft_delimiter_hunter(int fd, char *ret, char *to_find)
 	ssize_t	n_byt;
 	char	*temp_text;
 
-	buf = malloc(2 * sizeof(char)); // Allocate buffer for reading characters
+	buf = malloc(2 * sizeof(char));
 	if (!buf)
 		return (NULL);
 	n_byt = 1;
@@ -34,18 +34,18 @@ static char	*ft_delimiter_hunter(int fd, char *ret, char *to_find)
 		}
 		buf[n_byt] = '\0';
 		temp_text = ret;
-		ret = ft_strjoin(ret, buf); // Join ret and buf
-		free(temp_text); // Free the old ret pointer
+		ret = ft_strjoin(ret, buf);
+		free(temp_text);
 	}
-	free(buf); // Free the buffer
+	free(buf);
 	return (ret);
 }
 
 char	*to_the_delimiter(char *to_find)
 {
-	int			fd;
-	char		*text_stored;
-	char		*text_trimmed;
+	int		fd;
+	char	*text_stored;
+	char	*text_trimmed;
 
 	fd = STDIN_FILENO;
 	text_stored = NULL;

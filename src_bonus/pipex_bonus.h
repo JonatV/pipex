@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 16:51:36 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/09 16:51:36 by jveirman         ###   ########.fr       */
+/*   Created: 2024/04/24 13:23:39 by jveirman          #+#    #+#             */
+/*   Updated: 2024/04/24 13:23:39 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include <sys/wait.h>
-
-enum e_ARGV_DATA
-{
-	INFILE = 1,
-	CMD1,
-	CMD2,
-	OUTFILE
-};
 
 enum e_PIPE_DATA
 {

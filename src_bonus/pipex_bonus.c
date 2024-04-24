@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 16:51:32 by jveirman          #+#    #+#             */
-/*   Updated: 2024/04/09 16:51:32 by jveirman         ###   ########.fr       */
+/*   Created: 2024/04/24 13:23:58 by jveirman          #+#    #+#             */
+/*   Updated: 2024/04/24 13:23:58 by jveirman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static void	execute(char *full_cmd, char **envp)
 {
@@ -50,7 +50,7 @@ static void	pipe_n_fork(char *cmd, char **envp)
 		dup2(pipe_fd[READ], STDIN_FILENO);
 		waitpid(pid, NULL, 0);
 	}
-	if (0 == pid) // info - child process
+	if (0 == pid)
 	{
 		close(pipe_fd[READ]);
 		dup2(pipe_fd[WRITE], STDOUT_FILENO);
@@ -83,7 +83,7 @@ static void	read_user_input(char *delimiter)
 		if (text_input != NULL)
 			free(text_input);
 		close(pipe_fd[WRITE]);
-		exit(EXIT_SUCCESS); // info - Exit the child process
+		exit(EXIT_SUCCESS);
 	}
 }
 
@@ -96,8 +96,8 @@ static void	here_doc_management(int *i, char **argv, int argc, int *outfile)
 		STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
-	i = 3;
-	outfile = open_check(argv[argc - 1], 2);
+	*i = 3;
+	*outfile = open_check(argv[argc - 1], 2);
 	read_user_input(argv[2]);
 }
 
@@ -113,7 +113,7 @@ int	main(int argc, char *argv[], char **envp)
 		<infile> <cmd1> <cmd2> <more> <outfile>\n", STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
-	if (0 == ft_strncmp(argv[1], "here_doc", ft_strlen("here_doc"))) // info - it means we're using here_doc then << and >>
+	if (0 == ft_strncmp(argv[1], "here_doc", ft_strlen("here_doc")))
 		here_doc_management(&i, argv, argc, &outfile);
 	else
 	{

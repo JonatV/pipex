@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jveirman <jveirman@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	open_check(char *file_path, int option)
 {
@@ -51,14 +51,14 @@ char	*find_valid_path(char *cmd, char **envp, int i)
 	char	*temp_path;
 	char	*full_path;
 
-	while (ft_strnstr(envp[i], "PATH", 4) == 0) // info - find PATH:
+	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
-	all_paths = ft_split(envp[i] + 5, ':'); // info - go to PATH:here by skipping "PATH:"
+	all_paths = ft_split(envp[i] + 5, ':');
 	i = -1;
 	while (all_paths[++i])
 	{
-		temp_path = ft_strjoin(all_paths[i], "/"); // info - path + '/'
-		full_path = ft_strjoin(temp_path, cmd); // info - path/ + 'ls'
+		temp_path = ft_strjoin(all_paths[i], "/");
+		full_path = ft_strjoin(temp_path, cmd);
 		free(temp_path);
 		if (0 == access(full_path, F_OK | X_OK))
 		{

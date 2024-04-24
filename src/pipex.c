@@ -65,8 +65,8 @@ int	main(int argc, char *argv[], char **envp)
 
 	if (5 != argc)
 	{
-		ft_putstr_fd("Error : Pipex's call must looks like \
-		:./pipex <infile> <cmd1> <cmd2> <outfile>\n", STDOUT_FILENO);
+		ft_putstr_fd("Error : Pipex's call must looks like ", 1);
+		ft_putstr_fd(":./pipex <infile> <cmd1> <cmd2> <outfile>\n", 1);
 		exit(EXIT_SUCCESS);
 	}
 	infile = open_check(argv[1], 0);
